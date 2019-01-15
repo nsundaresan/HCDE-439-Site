@@ -41,6 +41,10 @@ a {
   padding: 70px 200px 0px;
 }
 
+.writeup {
+  padding: 70px 200px 0px;
+}
+
 .content p {
   flex: 50%;
 }
