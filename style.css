@@ -1,13 +1,17 @@
-@import url('https://fonts.googleapis.com/css?family=Work+Sans');
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+JP');
 
 html, body {
   padding: 0 0 0 0;
   margin: 0;
-  font-family: 'Work Sans', 'sans-serif';
+  font-family: 'Noto Sans JP', 'sans-serif';
+}
+
+body {
+  margin: 40px;
 }
 
 h1,h2,h3,h4 {
-  font-family: 'Work Sans', 'sans-serif';
+  font-family: 'Noto Sans JP', 'sans-serif';
   margin: 5px 5px 5px 5px;
 }
 
@@ -20,6 +24,9 @@ a {
 }
 
 .header {
+  display: grid;
+  grid-template-columns: 350px 600px ;
+  grid-gap: 45px;
   background: #fff;
   color: #000;
   height: 300px;
@@ -70,34 +77,4 @@ a {
   background: #F06;
   color: #F06;
   text-decoration: none;
-}
-
-.header {
-  display: grid;
-  grid-template-columns: 350px 600px ;
-  grid-gap: 10px;
-}
-
-.footer {
-    width: 1100px;
-    float: left;
-    padding: 300px 0px 30px 30px;
-}
-
-.widebody {
-    width: 800px;
-    padding: 0px 30px 30px 30px;
-}
-
-.widebody a {
-}
-
-.widebody a:hover {
-  background: #F06;
-  color: #FFF;
-  text-decoration: none;
-}
-
-body {
-  margin: 40px;
 }
