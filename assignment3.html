@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, maximum-scale=1.0" />
+        <title>Nanda Sundaresan | HCDE 439</title>
+        <link href="style.css" media="screen" rel="stylesheet" type="text/css" />
+    </head>
+
+    <body>
+        <div class="title">
+            <h1>Assignment 3: Input Output!</h1>
+            <p>"Create a schematic, circuit, and code that uses LEDs, a button, a for-loop,
+              digitalWrite(), digitalRead(), and analogWrite()."
+        </div>
+
+        <div class = "writeup">
+            <strong><p>Circuit demo:</p></strong>
+            <p><img src="Assignment3Images/gif1.gif" width=500></a></p>
+            <p>This is a gif showing how the circuit works when assembled.</p>
+            <p><img src="Assignment3Images/gif2.gif" width=500></a></p>
+            <p>This is a gif showing how the serial monitor displays changes in LED brightness.</p>
+          </br>
+          </br>
+            <strong><p>Circuit diagram:</p></strong>
+            <p><img src="Assignment3Images/circuitdiagram.png" width=500></a></p>
+            <p>This is an image with details regarding how the circuit is assembled.</p>
+            <p>Here are some images of how the circuit looks assembled:</p>
+            <p>
+              <img src="Assignment3Images/IMG_1884.jpg" width=300></a>
+              <img src="Assignment3Images/IMG_1885.jpg" width=300></a>
+              <img src="Assignment3Images/IMG_1886.jpg" width=300></a>
+            </p>
+          </br>
+          </br>
+            <strong><p>Schematic:</p></strong>
+            <p><img src="Assignment2Images/schematic.png" width=500></a></p>
+            <p>This is a schematic of my circuit. I used an analog pin for my LED so that I can change it's brightness when the button is pressed.</p>
+          </br>
+          </br>
+            <strong><p>Math:</p></strong>
+            <p>To choose the correct resistor for the red LED, I used Ohm's law.</p>
+          </br>
+            <p>V = IR</p>
+            <p>Known variables: I = 30mA (limited by the LED), V = 5V (total voltage) - 1.8V (voltage drop of LED)</p>
+            <p>R = V / I </p>
+            <p>R = ~107 Ohms</p>
+            <p>I chose to use the 220 Ohm resistor since it is the one with the closest value to 106.</p>
+          </br>
+          </br>
+            <strong><p>Code Snippet:</p></strong>
+            <p><img src="Assignment3Images/codesnippet.png" width=500></a></p>
+            <p>To satisfy all the conditions of the assignment, I decided to use digitalWrite() when the button is not pressed, allowing the LED to flash
+              on and off. When the button is pressed, the LED will fade from 0 brightness to full brightness, and repeat until the button is unpressed.</p>
+        </div>
+    </body>
+
+</html>

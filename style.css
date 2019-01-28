@@ -23,7 +23,7 @@ a {
   background: #fff;
   color: #000;
   height: 300px;
-  padding: 100px 200px 0px;
+  padding: 100px 100px 0px;
 }
 
 .title {
@@ -49,27 +49,34 @@ a {
   flex: 50%;
 }
 
-.assignment {
-  font-size: 12px;
-  line-height: 24px;
-  font-family: 'Chivo', 'sans-serif';
-  padding: 0px 0px 0px 20px;
-  width: 350px;
-  height: 350px;
-  float: left;
+.wrapper {
+  padding: 100px 100px 0px;
+  display: grid;
+  grid-template-columns: 350px 350px 350px ;
+  grid-gap: 10px;
 }
 
-.assignment a {
+.box {
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.box a {
     color: #000;
     text-decoration: none;
 }
 
-.assignment a:hover {
+.box a:hover {
   background: #F06;
   color: #F06;
   text-decoration: none;
 }
 
+.header {
+  display: grid;
+  grid-template-columns: 350px 600px ;
+  grid-gap: 10px;
+}
 
 .footer {
     width: 1100px;
@@ -89,4 +96,8 @@ a {
   background: #F06;
   color: #FFF;
   text-decoration: none;
+}
+
+body {
+  margin: 40px;
 }
