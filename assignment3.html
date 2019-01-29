@@ -10,8 +10,9 @@
     <body>
         <div class="title">
             <h1>Assignment 3: Input Output!</h1>
-            <p>"Create a schematic, circuit, and code that uses LEDs, a button, a for-loop,
-              digitalWrite(), digitalRead(), and analogWrite()."
+            <p>"Create a schematic, circuit, and code that uses a sensor (e.g. either the photoresistor or the thermistor)
+              in a voltage divider to change the state of an LED. Your schematic description should explain the values chosen.
+              You have to use analogRead(), analogWrite(), the map function, and an if-statement in your code."
         </div>
 
         <div class = "writeup">
@@ -34,8 +35,9 @@
           </br>
           </br>
             <strong><p>Schematic:</p></strong>
-            <p><img src="Assignment2Images/schematic.png" width=500></a></p>
-            <p>This is a schematic of my circuit. I used an analog pin for my LED so that I can change it's brightness when the button is pressed.</p>
+            <p><img src="Assignment3Images/IMG_1895.jpg" width=500></a></p>
+            <p>This is a schematic of my circuit. Calculations and justifications for resistor choices are
+            described below:</p>
           </br>
           </br>
             <strong><p>Math:</p></strong>
@@ -45,13 +47,19 @@
             <p>Known variables: I = 30mA (limited by the LED), V = 5V (total voltage) - 1.8V (voltage drop of LED)</p>
             <p>R = V / I </p>
             <p>R = ~107 Ohms</p>
-            <p>I chose to use the 220 Ohm resistor since it is the one with the closest value to 106.</p>
+            <p>I chose to use the 220 Ohm resistor since it is the one with the closest value to 106. For the photoresistor, I used a 10k ohm resistor
+            to make sure the current was fully grounded when the switch is off.</p>
+            <br>
+            <p>Values I might read at the voltage breaker might include:</p>
+            <p><img src="Assignment3Images/IMG_1896.jpg" width=500></p>
           </br>
           </br>
             <strong><p>Code Snippet:</p></strong>
-            <p><img src="Assignment3Images/codesnippet.png" width=500></a></p>
-            <p>To satisfy all the conditions of the assignment, I decided to use digitalWrite() when the button is not pressed, allowing the LED to flash
-              on and off. When the button is pressed, the LED will fade from 0 brightness to full brightness, and repeat until the button is unpressed.</p>
+            <p><img src="Assignment3Images/codesnippet.png" width=800></a></p>
+            <p>To satisfy all the conditions of the assignment, I decided to use analogRead() to get the condition of the photoresistor's current state.
+            I used analogWrite() to initialize the LED at a brightness of around 80%. The map function was used to translate photoresistor states to
+            LED brightness values from 0-255. Lastly, I used an if statement to change what is printed in the serial
+            monitor.</p>
         </div>
     </body>
 
