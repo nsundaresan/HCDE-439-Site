@@ -18,43 +18,39 @@
 
         <div class = "writeup">
             <strong><p>Circuit demo:</p></strong>
-            <p><img src="Assignment4Images/gif.gif" width=500></a></p>
-            <p>This is a gif showing how the circuit works when assembled. The LED strip gets brighter when the photoresistor detects a shadow or less light.</p>
+            <p><img src="Assignment5Images/gif.gif" width=500></a></p>
+            <p>This is a gif showing how the joystick values make the servo turn to a cooresponding angle.</p>
+            <p><img src="Assignment5Images/serialgif.gif" width=500></a></p>
+            <p>This is a gif of the serial output, printing values of the servo motor as it is turned.</p>
+
           </br>
           </br>
             <strong><p>Circuit diagram:</p></strong>
-            <p><img src="Assignment4Images/IMG_1925.jpg" width=500></a></p>
+            <p><img src="Assignment5Images/diagram.png" width=500></a></p>
             <p>This is an image with details regarding how the circuit is assembled.</p>
             <p>Here are some images of how the circuit looks assembled:</p>
             <p>
-              <img src="Assignment4Images/IMG_1926.jpg" width=300></a>
-              <img src="Assignment4Images/IMG_1927.jpg" width=300></a>
-              <img src="Assignment4Images/IMG_1928.jpg" width=300></a>
+              <img src="Assignment5Images/IMG_1946.jpg" width=300></a>
+              <img src="Assignment5Images/IMG_1947.jpg" width=300></a>
+              <img src="Assignment5Images/IMG_1948.jpg" width=300></a>
             </p>
           </br>
           </br>
             <strong><p>Schematic:</p></strong>
-            <p><img src="Assignment4Images/schematic.jpg" width=500></a></p>
-            <p>This is a schematic of my circuit. Calculations and justifications for resistor choices are
-            described below:</p>
+            <p><img src="Assignment5Images/schematic.jpg" width=500></a></p>
+            <p>This is a schematic of my circuit.</p>
           </br>
           </br>
-            <strong><p>Math:</p></strong>
-            <p>Calculating current for LED strip I used:</p>
-          </br>
-            <p>3.6V drop per white LED. 3 LEDs per segment of LED strip.</p>
-            <p>3.6V * 3 = 10.8V drop over the three LEDs.</p>
-            <p>12V (from power) = 10.8V (drop from LED) + V drop of resistor --> Resistor = 1.2V drop</p>
-            <p>Resistor on LED segment says '241' --> 240 Ohm resistor.</p>
-            <p>1.2/240 = 0.005A of current per LED segment</p>
-            <p>I used 102 LEDs, or 34 segments --> 0.005A * 34 = 0.17A of current for my LED strip.</p>
-          </br>
-            <p>For the photoresistor, I used a 10k ohm resistor to make sure the current was fully grounded when the switch is off.</p>
+            <strong><p>Calculations:</p></strong>
+            <p>There were not many real calculations to do when creating this circuit. One calculation/translation
+              was the mapping of the joystick value to servo angle.</p>
+            <p>Using the map function, we translated values 0-1023, to servo angles 0-180. That means that every 5-6 points the
+              joystick moves, there will be a 1 degree angle change with the servo.</p>
           </br>
           </br>
             <strong><p>Code Snippet:</p></strong>
-            <p><img src="Assignment4Images/code.png" width=800></a></p>
-            <p>I used analogWrite() to change the brightness of the LED strip when the photoresistor detects a shadow or less light.</p>
+            <p><img src="Assignment5Images/codesnippet.png" width=800></a></p>
+            <p>I used the serial monitor to print out what angle the servo motor is at.</p>
         </div>
     </body>
 
