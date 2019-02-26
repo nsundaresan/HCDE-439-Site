@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viarewport" content="width=device-width, maximum-scale=1.0" />
+        <title>Nanda Sundaresan | HCDE 439</title>
+        <link href="style.css" media="screen" rel="stylesheet" type="text/css" />
+    </head>
+
+    <body>
+        <div class="title">
+            <h1>Assignment 7: Computer Control!</h1>
+            <p>"Create a webpage with p5.js that interacts with your arduino.
+              By doing things with your keyboard and mouse, things must change in
+              the real world! Vice versa, by doing things on your arduino, the p5
+              page must also change. You must use JSON parsing, Serial, and p5.js.
+              Your webpage must be interactive. You must use a minimum of two input
+              devices from the arduino (e.g. LDR and Thermistor) and a minimum of
+              one output device from the arduino, one of which you control with a
+              transistor (e.g. led strip or DC motor)."</p>
+        </div>
+
+        <div class = "writeup">
+            <strong><p>Circuit demo:</p></strong>
+            <p><img src="Assignment7Images/gif.gif" width=500></a></p>
+            <p>This is a gif showing how the joystick values make the webpage increase or decrease the height of the bar.</p>
+          </br>
+          </br>
+            <strong><p>Circuit diagram:</p></strong>
+            <p>This is an image with details regarding how the circuit is assembled.</p>
+            <img src="Assignment7Images/4.jpg" width=800></a>
+            <p>Here are some images of how the circuit looks assembled:</p>
+            <p>
+              <img src="Assignment7Images/1.jpg" width=300></a>
+              <img src="Assignment7Images/2.jpg" width=300></a>
+              <img src="Assignment7Images/3.jpg" width=300></a>
+            </p>
+          </br>
+          </br>
+            <strong><p>Schematic:</p></strong>
+            <p><img src="Assignment7Images/5.jpg" width=500></a></p>
+            <p>This is a schematic of my circuit.</p>
+          </br>
+          </br>
+            <strong><p>Calculations:</p></strong>
+            <p>I chose to use a 10k ohm resistor for my button, photoresistor, and LED strip because
+            it will properly ensure the components are grounded. It is a safe choice for this circuit.
+            Other than that, there were no other real calculations. The values were translated from
+            the keyboard to the LED strip by determining their ASCII value.</p>
+          </br>
+          </br>
+            <strong><p>Code Snippet:</p></strong>
+            <p><img src="Assignment7Images/arduinocode.png" width=800></a></p>
+            <p>Above is the code that is programmed into the arduino.</p>
+            <p><img src="Assignment7Images/jscode1.png" width=800></a></p>
+            <p><img src="Assignment7Images/jscode2.png" width=800></a></p>
+            <p>Above is the code that is programmed into the browser to take serial values from the
+              arduino and display them as a graph, as well as communicate key pressed values to the arduino
+            to change the LED brightness.</p>
+        </div>
+    </body>
+
+</html>
