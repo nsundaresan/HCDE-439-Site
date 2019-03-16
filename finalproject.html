@@ -9,20 +9,263 @@
 
     <body>
       <div class="title">
-          <h1>Final Project: Concepts</h1>
-          <p>Sketches for my final project ideas</p>
+          <h1>Final Project: Bike Blinker Lights!</h1>
+          <p>A wearable bike blinker system that allows a biker to easily turn on turn-signals
+          to alert cars and pedestrians that they are going to change direction. The lights
+          will blink when the user clicks a button on a remote control. Different buttons create
+          different light patterns.</p>
       </div>
 
-      <div class="writeup">
-        <p><img src="GeneralImages/IMG_1897.JPG" width=500></p>
+      <div class = "writeup">
+        <strong><p>Bill of Materials:</p></strong>
+          <ol>
+            <li><a href="https://www.adafruit.com/product/1138">NeoPixel LED Strip (18 LEDs)</a></li>
+            <li><a href="https://www.adafruit.com/product/1097">Radio Reciever</a></li>
+            <li><a href="https://www.adafruit.com/product/1095">Radio Controller</a></li>
+            <li>Arduino Kit (HCDE 439 Standard)</li>
+            <li>20 AWG wires (12 feet, 4 feet * 3 colors)</li>
+            <li>USB connected Power Bank</li>
+          </ol>
 
-        <h3>Concept 1:</h3>
-        <p> My first idea is something that keeps you sitting or standing straight and keeping good posture.</p>
+        </br>
+        </br>
+          <strong><p>Circuit demo:</p></strong>
+          <p><img src="FinalProjectImages/gif.gif" width=500></a></p>
+          <p>Check out the link below to see the system in action! As shown in the video,
+            clicking different buttons on the remote control will change the indicator
+            direction and mode. Clicking on a button again will turn that mode off. </p>
+          </br>
+          <a href="https://www.youtube.com/watch?v=evESywnmHfI&feature=youtu.be">Click here for video!</a>
+        </br>
+        </br>
+          <strong><p>Circuit diagram:</p></strong>
+          <p>This is an image with details regarding how the circuit is assembled.</p>
+          <p>
+            <img src="FinalProjectImages/IMG_2062.jpg" width=800></a>
+            <img src="FinalProjectImages/circuitdiagram.png" width=800></a>
+          </p>
+          <p>Here are some images of how the circuit looks assembled:</p>
+          <p>
+            <img src="FinalProjectImages/IMG_2063.jpg" width=300></a>
+            <img src="FinalProjectImages/IMG_2064.jpg" width=300></a>
+            <img src="FinalProjectImages/IMG_2066.jpg" width=300></a>
+          </p>
+        </br>
+        </br>
+          <strong><p>Schematic:</p></strong>
+          <p><img src="FinalProjectImages/schematic.jpg" width=500></a></p>
+          <p>This is a schematic of my circuit.</p>
+        </br>
+        </br>
+          <strong><p>Calculations:</p></strong>
+          <p>There was some important math to do for this project, as I chose to use
+          the arduino's 5V pin to provide power for my entire LED setup. To take some
+          precautions, I needed to do some math to figure out how many LEDs I could
+          safely use.
+          </br></br>
+          According to the Adafruit website, each neopixel uses 20 mA on average (ex. one color)
+          and 60 mA if they are on full brightness, white light. I calculated current
+          usage for both these cases. According to another website, the 5V pin can safely
+          provide 500mA of current.
+          </br></br>
+          I used 18 total LEDs, 9 for each side of the signal.
+          </br></br>
+          20mA per LED * 18 LED = 180 mA. This means I can safely power both my LED strips on one color, full brightness.
+          </br></br>
+          60mA per LED * 18 LED = 1080 mA. This is way over the 500mA cap for the 5V pin. This means I cannot turn on
+          both LED strips at full brightness at the same time.</p>
+        </br>
+        </br>
+          <strong><p>Code Snippet:</p></strong>
+            <pre>
+              #include <Adafruit_NeoPixel.h> // include neopixel library
 
-        <h3>Concept 2</h3>
-        <p>My second idea (my favorite) is a turn indicator made for bikers that they can wear on their back.
-        I could use a couple switches connected to LED strips on the user's back.</p>
+              // more neopixel setup code
+              #ifdef __AVR__
+              #include <avr/power.h>
+              #endif
+
+              //Left LED define
+              #define LeftNeoPixelPin 6
+              #define LeftNeoPixelNo 9
+
+              //Right LED define
+              #define RightNeoPixelPin 9
+              #define RightNeoPixelNo 9
+
+              //Input pins define
+              #define InputBtn1Pin 2
+              #define InputBtn2Pin 3
+              #define InputBtn3Pin 4
+              #define InputBtn4Pin 5
+
+              int delayval = 25; // 25 ms
+
+              int PowerBankWakeUpPin = 12; // setting up power bank pin
+
+              // setting up neopixel strips
+              Adafruit_NeoPixel pixelsL = Adafruit_NeoPixel(LeftNeoPixelNo, LeftNeoPixelPin, NEO_GRB + NEO_KHZ800);
+              Adafruit_NeoPixel pixelsR = Adafruit_NeoPixel(RightNeoPixelNo, RightNeoPixelPin, NEO_GRB + NEO_KHZ800);
+
+              // initializing button values for radio receiver
+              int btn1State = 0;
+              int btn2State = 0;
+              int btn3State = 0;
+              int btn4State = 0;
+
+              boolean PowerBankPresent = true; //if power connected to power bak usb battery.
+
+              void setup() {
+
+                // NeoPixel setup code
+                #if defined (__AVR_ATtiny85__)
+                  if (F_CPU == 16000000) clock_prescale_set(clock_div_1);
+                #endif
+
+                pixelsL.begin(); // This initializes the NeoPixel library.
+                pixelsR.begin(); // This initializes the NeoPixel library.
+
+                // Initalize button input
+                pinMode(InputBtn1Pin, INPUT); // Left turn
+                pinMode(InputBtn2Pin, INPUT);// Right turn
+                pinMode(InputBtn3Pin, INPUT);
+                pinMode(InputBtn4Pin, INPUT);
+
+                // Initalize NeoPixel Output
+                pinMode(LeftNeoPixelPin, OUTPUT);
+                pinMode(RightNeoPixelPin, OUTPUT);
+
+                Serial.begin(9600);
+
+                // set up power bank pin so that the powerbank always stays on
+                pinMode(PowerBankWakeUpPin, OUTPUT);
+                if (PowerBankPresent ) { // if connected to power bank usb
+                  Serial.println("PowerBankResistor : on");
+                  digitalWrite(PowerBankWakeUpPin, HIGH);
+                }
+
+              }
+
+              void loop() {
+                // reading the states of all the buttons to see which one is on
+                btn1State = digitalRead(InputBtn1Pin);
+                btn2State = digitalRead(InputBtn2Pin);
+                btn3State = digitalRead(InputBtn3Pin);
+                btn4State = digitalRead(InputBtn4Pin);
+
+                // LEFT turn, if button 1 state is registered as high, it will first turn all strips black, and then
+                // perform the turning signal indicator on the LEFT LED.
+                if (btn1State == HIGH) {
+                  Serial.println("1 on");
+                  AllStripsBlack(); // turning off all LEDs
+                  // turning on one light at a time on the LED strip
+                  for (int i = 0; i <= 9; i++) {
+                    PixelRed(i, 0);
+                    delay(delayval);
+                    PixelBlack(i, 0);
+                  }
+                } else {
+                  AllStripsBlack();
+                }
+
+                // RIGHT Turn, if button 3 state is registered as high, it will first turn all strips black, and then
+                // perform the turning signal indicator on the LEFT LED.
+                if (btn3State == HIGH) {
+                  Serial.println("3 on");
+                  AllStripsBlack(); // turning off all the LEDs
+                  // turning on one light at a time on the LED strip
+                  for (int i = 0; i <= 9; i++) {
+                    PixelRed(i, 1);
+                    delay(delayval);
+                    PixelBlack(i, 1);
+                  }
+                } else {
+                  AllStripsBlack();
+                }
+
+                // Flashing, if button 2 state is registered as high, it will turn all the LEDs on one strip to white, turn
+                // it off, then do the same for the other one, creating an alternating flash pattern.
+                if (btn2State == HIGH) {
+                  Serial.println("Flashing");
+                  // setting LED colors, low = off, high = white
+                  uint32_t low = pixelsL.Color(0, 0, 0);
+                  uint32_t high = pixelsL.Color(255, 255, 255);
+                  AllStripsBlack(); // turning off all the LEDs
+                  // turning on all the LEDs of one light and turning off the other
+                  for (int i = 0; i < 9; i++) {
+                    pixelsR.setPixelColor(i, low);
+                    pixelsR.show();
+                    pixelsL.setPixelColor(i, high);
+                    pixelsL.show();
+                  }
+                  delay(100);
+                  // turning on all the LEDs of one light and turning off the other, opposite of first for loop
+                  for ( int i = 0; i < 9; i++) {
+                    pixelsL.setPixelColor(i, low);
+                    pixelsL.show();
+                    pixelsR.setPixelColor(i, high);
+                    pixelsR.show();
+                  }
+                  delay(100); // short delay between flashing
+                } else {
+                  AllStripsBlack();
+                }
+
+              }
+
+              // Sides for all the following functions: 0 = LEFT, 1 = RIGHT
+
+              // based on side input, turns on red LED for left or right LED strip
+              void PixelRed(int i, int Side) {
+                switch (Side) {
+                  case 0:
+                    pixelsL.setPixelColor(i, pixelsL.Color(255, 0, 0)); // red
+                    pixelsL.show();
+                    // set lights of LEFT LED strip to all red
+                    for (uint16_t i = 0; i < 10; i++) {
+                      pixelsR.setPixelColor(i, pixelsR.Color(255, 0, 0));
+                      pixelsR.show();
+                    }
+                    break;
+
+                  case 1:
+                    pixelsR.setPixelColor(i, pixelsR.Color(255, 0, 0));
+                    pixelsR.show();
+                    // set lights of RIGHT LED strip to all red
+                    for (uint16_t i = 0; i < 10; i++) {
+                      pixelsL.setPixelColor(i, pixelsL.Color(255, 0, 0));
+                      pixelsL.show();
+                    }
+                    break;
+                }
+              }
+
+              // Sets a LED to all black
+              void PixelBlack(int i, int Side) {
+                switch (Side) {
+                  case 0:
+                    pixelsL.setPixelColor(i, pixelsL.Color(0, 0, 0));
+                    pixelsL.show();
+                    break;
+                  case 1:
+                    pixelsR.setPixelColor(i, pixelsR.Color(0, 0, 0));
+                    pixelsR.show();
+                    break;
+                }
+              }
+
+
+              // turns all strips all black (all lights off)
+              void AllStripsBlack() {
+                for (int i = 0; i < LeftNeoPixelNo; i++) {
+                  PixelBlack(i, 0);
+                }
+                for (int i = 0; i < RightNeoPixelNo; i++) {
+                  PixelBlack(i, 1);
+                }
+              }
+            </pre>
       </div>
-    </body>
+  </body>
 
-</html>
+  </html>
